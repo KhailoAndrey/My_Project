@@ -14,7 +14,7 @@ const options = {
   defaultDate: new Date(),
   dateFormat: "d-m-Y",
   onClose(dateStr) {
-    userDate = dateStr;
+    userDate = dateStr[0];
   },
 };
 flatpickr(dateForm, options);
