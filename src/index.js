@@ -8,15 +8,18 @@ const dateForm = document.getElementById("datetime-picker");
 const cardSchedule = document.getElementById("schedule-list");
 const inputLesson = document.getElementById("input-lesson");
 
-let userDate = new Date();
+let userDate = new Date().toLocaleDateString();
+let userDateArray =[];
 
 const options = {
   defaultDate: new Date(),
-  dateFormat: "d-m-Y",
+  // dateFormat: "Y-d-m",
   onClose(dateStr) {
-    userDate = dateStr[0];
+    userDate = dateStr[0].toLocaleDateString();
   },
 };
+console.log(options.defaultDate.toLocaleDateString());
+
 flatpickr(dateForm, options);
 
 submitBtn.addEventListener("click", submitHandler);
@@ -28,16 +31,27 @@ function submitHandler(e) {
     date: userDate,
     lesson: inputLesson.value,
   };
-
-  Schedules.create(schedule);
+  // Schedules.create(schedule);
+  Schedules.get(schedule.date);
+  // console.log(Schedules.userDateArray);
+    // .then((lessons) => createCardSchedule(lessons));
 }
 
-function createCardSchedule(countLesson, lesson) {
-  cardSchedule.innerHTML = "";
-  const markup = "";
-  for (let i = 1; i <= countLesson; i++) {
-    markup = `<li>${i}. </li>  
-    <li>${lesson}</li>`;
-    cardSchedule.insertAdjacentHTML("beforeend", markup);
-  }
+function createCardSchedule(lessons) {
+  console.log(lessons);
+  const markup = lessons
+    .map((lesson) => {
+      return `<li>${lesson.lesson}</li>`;
+    })
+    .join("");
+  cardSchedule.insertAdjacentHTML("beforeend", markup);
+
+  // cardSchedule.innerHTML = "";
+  // console.log(userDateArray.length);
+  // const markup = "";
+  // for (let i = 1; i <= userDateArray.length; i++) {
+  //   markup = `<li>${i}. </li>
+  //   <li>${userDateArray.lesson}</li>`;
+  //   cardSchedule.insertAdjacentHTML("beforeend", markup);
+  //   console.log(markup);
 }
