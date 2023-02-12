@@ -9,7 +9,7 @@ const cardSchedule = document.getElementById("schedule-list");
 const inputLesson = document.getElementById("input-lesson");
 
 let userDate = new Date().toLocaleDateString();
-let userDateArray =[];
+// let userDateArray =[];
 
 const options = {
   defaultDate: new Date(),
@@ -31,27 +31,29 @@ function submitHandler(e) {
     date: userDate,
     lesson: inputLesson.value,
   };
+  // Create lessons
   // Schedules.create(schedule);
-  Schedules.get(schedule.date);
-  // console.log(Schedules.userDateArray);
-    // .then((lessons) => createCardSchedule(lessons));
+
+  // Get lessons
+  Schedules.getLessons(schedule.date).then((array) =>
+    createCardSchedule(array)
+  );
 }
 
-function createCardSchedule(lessons) {
-  console.log(lessons);
-  const markup = lessons
-    .map((lesson) => {
-      return `<li>${lesson.lesson}</li>`;
-    })
-    .join("");
-  cardSchedule.insertAdjacentHTML("beforeend", markup);
-
-  // cardSchedule.innerHTML = "";
-  // console.log(userDateArray.length);
-  // const markup = "";
-  // for (let i = 1; i <= userDateArray.length; i++) {
-  //   markup = `<li>${i}. </li>
-  //   <li>${userDateArray.lesson}</li>`;
+function createCardSchedule(array) {
+  console.log(array);
+  //   const markup = array
+  //     .map((arr) => {
+  //       `<li>${arr.lesson}</li>`
+  //     }).join("");
+  //     console.log(markup);
   //   cardSchedule.insertAdjacentHTML("beforeend", markup);
-  //   console.log(markup);
+
+  cardSchedule.innerHTML = "";
+  // let markup = "";
+  for (let i = 0; i <= array.length; i++) {
+    const markup = `<li>${array[i].lesson}</li>`;
+    cardSchedule.innerHTML += markup;
+    console.log(markup);
+  }
 }

@@ -1,11 +1,7 @@
 export class Schedules {
-  //   constructor(userDateArray) {
-  //     this.userDateArray = [];
-  //   }
-  //   #URL: "https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json";
-  //   constructor(URL) {
-  //     this.URL = date;
-  //   }
+  constructor() {
+    this.userDateArray = [];
+  }
   static create(schedule) {
     return fetch(
       "https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json",
@@ -20,8 +16,8 @@ export class Schedules {
     // .then((response) => console.log(response));
   }
 
-  static get(date) {
-    return fetch(
+  static getLessons(date) {
+     return fetch(
       "https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json",
       {
         headers: {
@@ -31,13 +27,13 @@ export class Schedules {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(Object.values(response));
-        const userDateArray = Object.values(response).filter(
+        // console.log(Object.values(response));
+        this.userDateArray = Object.values(response).filter(
           (resp) => resp.date === date
         );
-        console.log(userDateArray);
+        // console.log(this.userDateArray);
+        return this.userDateArray;
       });
-    // return this.userDateArray;
   }
 }
 
