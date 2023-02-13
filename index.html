@@ -19,6 +19,19 @@
         <br />
         <small class="author">by Andrei Khaylo</small>
       </div>
+      <br />
+      <br />
+      <div>
+        <p style="font-size: 16px; color: blue">Вход для учителя</p>
+      </div>
+      <button
+        type="button"
+        class="mui-btn mui-btn--primary"
+        onclick="activateModal()"
+        id="enter-btn"
+      >
+        Войти
+      </button>
     </div>
     <div id="content" class="mui-container-fluid">
       <div class="mui-row">
@@ -41,7 +54,7 @@
           </button>
           <!-- </form> -->
           <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" id="input-lesson" />
+            <input type="text" id="input-lesson" disabled />
             <label>Введите урок</label>
           </div>
           <br />
@@ -51,7 +64,7 @@
           <br />
           <!-- card of schedule -->
           <div id="schedule-card">
-            <ol id="schedule-list"></ol>
+            <ol class="list" id="schedule-list"></ol>
           </div>
           <br />
         </div>
