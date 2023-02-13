@@ -2,9 +2,9 @@ export class Schedules {
   constructor() {
     this.userDateArray = [];
   }
-  static create(schedule) {
+  static create(schedule, token) {
     return fetch(
-      "https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json",
+      `https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json?=auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify(schedule),
@@ -12,12 +12,13 @@ export class Schedules {
           "Content-Type": "application/json",
         },
       }
-    ).then((response) => response.json());
-    // .then((response) => console.log(response));
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response));
   }
 
   static getLessons(date) {
-     return fetch(
+    return fetch(
       "https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json",
       {
         headers: {
@@ -35,14 +36,65 @@ export class Schedules {
         return this.userDateArray;
       });
   }
+
+  static fetch(token) {
+    return fetch(
+      `https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json?=auth=${token}`
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(Object.values(response)));
+  }
 }
 
-// export function fetchData(date, method) {
-//     fetch(schedules.URL, options)
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error(response.status);
-//         }
-//         return response.json();
-//       });
-// }
+export function createModal(title, content) {
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  const html = `
+  <h1>${title}</h1>
+  <div class="modal-content">${content}</div>
+  `;
+  modal.innerHTML = html;
+  mui.overlay("on", modal);
+}
+
+export function closeModal() {
+  mui.overlay("off");
+}
+
+export function getAuth() {
+  return `
+  <form class="mui-form" id="auth-form">
+    <div class="mui-textfield mui-textfield--float-label">
+    <input type="email" id="email" required>
+    <label for="email">Email</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="password" id="password" required>
+    <label for="password">Пароль</label>
+  </div>
+  <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Войти</button>
+</form>
+  `;
+}
+
+export function authEmailPassword(email, password) {
+  const apiKey = "AIzaSyCa6-FTZSE0VBhFhzf2IETcXHGyEZ8D8Sc";
+  return fetch(
+    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
+    {
+      method: "POST",
+      body: JSON.stringify({ email, password, returnSecureToken: true }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error(resp.status);
+      }
+      return resp.json();
+    })
+    .then((data) => data.idToken)
+    .catch((error) => alert("Такой Email не зарегистрирован!"));
+}

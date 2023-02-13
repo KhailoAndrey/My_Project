@@ -1,6 +1,12 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-import { Schedules } from "./functions";
+import {
+  Schedules,
+  createModal,
+  closeModal,
+  getAuth,
+  authEmailPassword,
+} from "./functions";
 import "./styles.css";
 
 const submitBtn = document.getElementById("submit-form");
@@ -8,6 +14,7 @@ const dateForm = document.getElementById("datetime-picker");
 const cardSchedule = document.getElementById("schedule-list");
 const inputLesson = document.getElementById("input-lesson");
 const teacherBtn = document.getElementById("enter-btn");
+const sendBtn = document.getElementById("send-lesson");
 
 let userDate = new Date().toLocaleDateString();
 // let userDateArray =[];
@@ -29,7 +36,7 @@ function submitHandler(e) {
   e.preventDefault();
   const schedule = {
     date: userDate,
-    lesson: inputLesson.value,
+    // lesson: inputLesson.value,
   };
   // Create lessons
   // Schedules.create(schedule);
@@ -59,13 +66,40 @@ function createCardSchedule(array) {
 teacherBtn.addEventListener("click", activateModal);
 
 function activateModal() {
-  // initialize modal element
-  var modalEl = document.createElement("div");
-  modalEl.style.width = "400px";
-  modalEl.style.height = "300px";
-  modalEl.style.margin = "100px auto";
-  modalEl.style.backgroundColor = "#fff";
+  createModal("Авторизация", getAuth());
+  document
+    .getElementById("auth-form")
+    .addEventListener("submit", authHandler, { once: true });
+}
 
-  // show modal
-  mui.overlay("on", modalEl);
+function authHandler(e) {
+  e.preventDefault();
+  const email = e.target.querySelector("#email").value;
+  const password = e.target.querySelector("#password").value;
+  authEmailPassword(email, password).then(sendLesson);
+
+  // .then(Schedules.fetch)
+
+  // .then(() => {
+  //   closeModal();
+  //   inputLesson.removeAttribute("disabled");
+  // })
+}
+
+function sendLesson(token) {
+  closeModal();
+  inputLesson.removeAttribute("disabled");
+  sendBtn.removeAttribute("disabled");
+  sendBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const schedule = {
+      date: userDate,
+      lesson: inputLesson.value,
+    };
+    Schedules.create(schedule, token);
+    Schedules.getLessons(schedule.date).then((array) =>
+      createCardSchedule(array)
+    );
+    inputLesson.value = "";
+  });
 }

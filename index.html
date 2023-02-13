@@ -24,12 +24,7 @@
       <div>
         <p style="font-size: 16px; color: blue">Вход для учителя</p>
       </div>
-      <button
-        type="button"
-        class="mui-btn mui-btn--primary"
-        onclick="activateModal()"
-        id="enter-btn"
-      >
+      <button type="button" class="mui-btn mui-btn--primary" id="enter-btn">
         Войти
       </button>
     </div>
@@ -55,8 +50,16 @@
           <!-- </form> -->
           <div class="mui-textfield mui-textfield--float-label">
             <input type="text" id="input-lesson" disabled />
-            <label>Введите урок</label>
+            <label>Введите урок (поле для учителя)</label>
           </div>
+          <button
+            type="submit"
+            class="mui-btn mui-btn--raised mui-btn--primary"
+            id="send-lesson"
+            disabled
+          >
+            Записать в расписание
+          </button>
           <br />
           <br />
           <div class="mui--text-black-54 mui--text-body2">Расписание</div>
