@@ -76,17 +76,19 @@ function authHandler(e) {
   e.preventDefault();
   const email = e.target.querySelector("#email").value;
   const password = e.target.querySelector("#password").value;
-  authEmailPassword(email, password).then(sendLesson);
+  authEmailPassword(email, password)
+    .then(sendLesson)
+    .catch((error) => alert("Неправильный Email или пароль!"));
 
   // .then(Schedules.fetch)
-
-  // .then(() => {
-  //   closeModal();
-  //   inputLesson.removeAttribute("disabled");
   // })
 }
 
 function sendLesson(token) {
+  if (!token) {
+    closeModal();
+    return alert("Введите корректные данные и повторите попытку!");
+  }
   closeModal();
   inputLesson.removeAttribute("disabled");
   sendBtn.removeAttribute("disabled");

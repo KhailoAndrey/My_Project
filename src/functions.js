@@ -96,5 +96,5 @@ export function authEmailPassword(email, password) {
       return resp.json();
     })
     .then((data) => data.idToken)
-    .catch((error) => alert("Такой Email не зарегистрирован!"));
+    .catch((error) => alert("Неправильный Email или пароль!"));
 }
