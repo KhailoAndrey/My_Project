@@ -52,7 +52,7 @@ export function createModal(title, content) {
   const html = `
   <button type="button" class="modal-close-btn">
   <svg width="18px" height="18px">
-  <use href="./images/symbol-defs.svg#icon-close-button"></use>
+  <use href="./images/cross.svg" widht="18px"></use>
   </svg>
   </button>
 <h1>${title}</h1>
@@ -61,11 +61,15 @@ export function createModal(title, content) {
   modal.innerHTML = html;
   mui.overlay("on", modal);
 }
-//  <img src="./images/close-button.svg"/>
+//  <img src="./images/cross.svg" widht="18px"/>
 
 //  <svg width="18px" height="18px">
 //   <use href="./images/close-button.svg"></use>
 // </svg>;
+
+/* <svg width="18px" height="18px">
+  <use href="./images/cross.svg"></use>
+  </svg>; */
 
 export function closeModal() {
   mui.overlay("off");
@@ -81,6 +85,11 @@ export function getAuth() {
   <div class="mui-textfield mui-textfield--float-label">
     <input type="password" id="password" required>
     <label for="password">Пароль</label>
+    <span class="eye-btn">
+<img src="../src/images/eye-blocked.svg" />
+    
+    
+    </span>
   </div>
   <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Войти</button>
 </form>

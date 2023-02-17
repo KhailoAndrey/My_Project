@@ -1,5 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from "notiflix";
 import {
   Schedules,
   createModal,
@@ -49,10 +50,10 @@ function submitHandler(e) {
 }
 
 function createCardSchedule(array) {
-  const closeBtn = document.querySelector(".close-btn");
-  closeBtn.addEventListener("click", () => {
-    closeModal();
-  });
+  // const closeBtn = document.querySelector(".close-btn");
+  // closeBtn.addEventListener("click", () => {
+  //   closeModal();
+  // });
   cardSchedule.innerHTML = "";
   console.log(array);
   const markup = array.map((arr) => `<li>${arr.lesson}</li>`).join("");
@@ -71,6 +72,13 @@ function createCardSchedule(array) {
 teacherBtn.addEventListener("click", activateModal);
 
 function activateModal() {
+  if (teacherBtn.textContent === "Выйти") {
+    // token = null;
+    inputLesson.setAttribute("disabled", true);
+    sendBtn.setAttribute("disabled", true);
+    teacherBtn.textContent = "Войти";
+    return;
+  }
   createModal("Авторизация", getAuth());
   document
     .getElementById("auth-form")
@@ -97,24 +105,26 @@ function sendLesson(token) {
   // teacherBtn.removeEventListener();
   closeModal();
   teacherBtn.textContent = "Выйти";
-  teacherBtn.addEventListener("click", () => {
-    token = null;
-    inputLesson.addAttribute("disabled");
-    sendBtn.addAttribute("disabled");
-    return;
-  });
+  // teacherBtn.addEventListener("click", () => {
+  //   token = null;
+  //   inputLesson.addAttribute("disabled");
+  //   sendBtn.addAttribute("disabled");
+  //   return;
+  // });
   inputLesson.removeAttribute("disabled");
   sendBtn.removeAttribute("disabled");
   sendBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const schedule = {
       date: userDate,
-      lesson: inputLesson.value,
+      lesson: inputLesson.value.trim(),
     };
-    Schedules.create(schedule, token);
-    Schedules.getLessons(schedule.date).then((array) =>
-      createCardSchedule(array)
-    );
+    if (schedule.lesson != "") {
+      Schedules.create(schedule, token);
+      Schedules.getLessons(schedule.date).then((array) =>
+        createCardSchedule(array)
+      );
+    } else Notiflix.Notify.failure("Поле урока не может быть пустым!");
     inputLesson.value = "";
   });
 }

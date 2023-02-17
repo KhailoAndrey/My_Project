@@ -99,3 +99,9 @@ button {
   background-color: #fff;
   box-shadow: none;
 }
+
+.eye-btn {
+  float: right;
+  margin-top: -25px;
+  cursor: pointer;
+}
