@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "school schedule",
   "main": "index.js",
+  "homepage": "https://KhailoAndrey.github.io/My_Project",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d public"
   },
   "repository": {
     "type": "git",
