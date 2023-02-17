@@ -50,6 +50,7 @@ export function createModal(title, content) {
   const modal = document.createElement("div");
   modal.classList.add("modal");
   const html = `
+
   <h1>${title}</h1>
   <div class="modal-content">${content}</div>
   `;
@@ -63,7 +64,7 @@ export function closeModal() {
 
 export function getAuth() {
   return `
-  <form class="mui-form" id="auth-form">
+  <form class="mui-form auth-form" id="auth-form">
     <div class="mui-textfield mui-textfield--float-label">
     <input type="email" id="email" required>
     <label for="email">Email</label>
@@ -76,6 +77,8 @@ export function getAuth() {
 </form>
   `;
 }
+
+
 
 export function authEmailPassword(email, password) {
   const apiKey = "AIzaSyCa6-FTZSE0VBhFhzf2IETcXHGyEZ8D8Sc";

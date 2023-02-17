@@ -15,6 +15,7 @@ const cardSchedule = document.getElementById("schedule-list");
 const inputLesson = document.getElementById("input-lesson");
 const teacherBtn = document.getElementById("enter-btn");
 const sendBtn = document.getElementById("send-lesson");
+// const enterBtn = document.getElementById("enter-btn");
 
 let userDate = new Date().toLocaleDateString();
 // let userDateArray =[];
@@ -89,7 +90,15 @@ function sendLesson(token) {
     closeModal();
     return alert("Введите корректные данные и повторите попытку!");
   }
+  // teacherBtn.removeEventListener();
   closeModal();
+  teacherBtn.textContent = "Выйти";
+  teacherBtn.addEventListener("click", () => {
+    token = null;
+    inputLesson.addAttribute("disabled");
+    sendBtn.addAttribute("disabled");
+    return;
+  });
   inputLesson.removeAttribute("disabled");
   sendBtn.removeAttribute("disabled");
   sendBtn.addEventListener("click", (e) => {
