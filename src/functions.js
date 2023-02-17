@@ -50,7 +50,7 @@ export function createModal(title, content) {
   const modal = document.createElement("div");
   modal.classList.add("modal");
   const html = `
-  <button type="button" class="modal__close-btn">
+  <button type="button" class="modal-close-btn">
   <svg width="18" height="18">
   <use href="./images/symbol-defs.svg#icon-close-button"></use>
 </svg>
