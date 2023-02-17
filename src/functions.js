@@ -51,19 +51,21 @@ export function createModal(title, content) {
   modal.classList.add("modal");
   const html = `
   <button type="button" class="modal-close-btn">
-  <svg width="18" height="18">
+  <svg width="18px" height="18px">
   <use href="./images/symbol-defs.svg#icon-close-button"></use>
-</svg>
-</button>
+  </svg>
+  </button>
 <h1>${title}</h1>
 <div class="modal-content">${content}</div>
 `;
   modal.innerHTML = html;
   mui.overlay("on", modal);
 }
-//  <img src="../images/close-button.svg" class="close-btn"/>
+//  <img src="./images/close-button.svg"/>
 
-
+//  <svg width="18px" height="18px">
+//   <use href="./images/close-button.svg"></use>
+// </svg>;
 
 export function closeModal() {
   mui.overlay("off");
@@ -84,8 +86,6 @@ export function getAuth() {
 </form>
   `;
 }
-
-
 
 export function authEmailPassword(email, password) {
   const apiKey = "AIzaSyCa6-FTZSE0VBhFhzf2IETcXHGyEZ8D8Sc";
