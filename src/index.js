@@ -19,7 +19,7 @@ const sendBtn = document.getElementById("send-lesson");
 // const enterBtn = document.getElementById("enter-btn");
 
 let userDate = new Date().toLocaleDateString();
-// let userDateArray =[];
+let token = "";
 
 const options = {
   defaultDate: new Date(),
@@ -73,7 +73,7 @@ teacherBtn.addEventListener("click", activateModal);
 
 function activateModal() {
   if (teacherBtn.textContent === "Выйти") {
-    // token = null;
+    // token = "";
     inputLesson.setAttribute("disabled", true);
     sendBtn.setAttribute("disabled", true);
     teacherBtn.textContent = "Войти";
@@ -98,6 +98,7 @@ function authHandler(e) {
 }
 
 function sendLesson(token) {
+  console.log(token);
   if (!token) {
     closeModal();
     return alert("Введите корректные данные и повторите попытку!");
@@ -120,6 +121,11 @@ function sendLesson(token) {
       lesson: inputLesson.value.trim(),
     };
     if (schedule.lesson != "") {
+      if (teacherBtn.textContent === "Войти") {
+        token = "";
+        Notiflix.Notify.failure("Для внесения уроков Вам нужно войти!");
+        return;
+      }
       Schedules.create(schedule, token);
       Schedules.getLessons(schedule.date).then((array) =>
         createCardSchedule(array)
