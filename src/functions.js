@@ -50,13 +50,20 @@ export function createModal(title, content) {
   const modal = document.createElement("div");
   modal.classList.add("modal");
   const html = `
-
-  <h1>${title}</h1>
-  <div class="modal-content">${content}</div>
-  `;
+  <button type="button" class="modal__close-btn">
+  <svg width="18" height="18">
+  <use href="./images/symbol-defs.svg#icon-close-button"></use>
+</svg>
+</button>
+<h1>${title}</h1>
+<div class="modal-content">${content}</div>
+`;
   modal.innerHTML = html;
   mui.overlay("on", modal);
 }
+//  <img src="../images/close-button.svg" class="close-btn"/>
+
+
 
 export function closeModal() {
   mui.overlay("off");

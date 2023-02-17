@@ -49,6 +49,10 @@ function submitHandler(e) {
 }
 
 function createCardSchedule(array) {
+  const closeBtn = document.querySelector(".close-btn");
+  closeBtn.addEventListener("click", () => {
+    closeModal();
+  });
   cardSchedule.innerHTML = "";
   console.log(array);
   const markup = array.map((arr) => `<li>${arr.lesson}</li>`).join("");
