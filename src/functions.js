@@ -2,8 +2,10 @@ export class Schedules {
   constructor() {
     this.userDateArray = [];
   }
-  static create(schedule, token) {
-    return fetch(
+
+  // Внесение уроков
+  static async create(schedule, token) {
+    const response = await fetch(
       `https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json?=auth=${token}`,
       {
         method: "POST",
@@ -12,11 +14,12 @@ export class Schedules {
           "Content-Type": "application/json",
         },
       }
-    )
-      .then((response) => response.json())
-      .then((response) => console.log(response));
+    );
+    const response_1 = await response.json();
+    return console.log(response_1);
   }
 
+  // Получение списка уроков
   static getLessons(date) {
     return fetch(
       "https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json",
@@ -37,22 +40,23 @@ export class Schedules {
       });
   }
 
-  static fetch(token) {
-    return fetch(
-      `https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json?=auth=${token}`
-    )
-      .then((response) => response.json())
-      .then((response) => console.log(Object.values(response)));
-  }
+  // static fetch(token) {
+  //   return fetch(
+  //     `https://school-schedule-6e59d-default-rtdb.europe-west1.firebasedatabase.app/schedules.json?=auth=${token}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((response) => console.log(Object.values(response)));
+  // }
 }
 
+// Создание модалки
 export function createModal(title, content) {
   const modal = document.createElement("div");
   modal.classList.add("modal");
   const html = `
   <button type="button" class="modal-close-btn">
   <svg width="18px" height="18px">
-  <use href="./images/cross.svg" widht="18px"></use>
+  <use href="./src/images/cross.svg" widht="18px"></use>
   </svg>
   </button>
 <h1>${title}</h1>
@@ -61,20 +65,13 @@ export function createModal(title, content) {
   modal.innerHTML = html;
   mui.overlay("on", modal);
 }
-//  <img src="./images/cross.svg" widht="18px"/>
 
-//  <svg width="18px" height="18px">
-//   <use href="./images/close-button.svg"></use>
-// </svg>;
-
-/* <svg width="18px" height="18px">
-  <use href="./images/cross.svg"></use>
-  </svg>; */
-
+// Закрытие модалки
 export function closeModal() {
   mui.overlay("off");
 }
 
+// Разметка окна авторизации
 export function getAuth() {
   return `
   <form class="mui-form auth-form" id="auth-form">
@@ -86,7 +83,7 @@ export function getAuth() {
     <input type="password" id="password" required>
     <label for="password">Пароль</label>
     <span class="eye-btn">
-<img src="../src/images/eye-blocked.svg" />
+<img src="./src/images/eye-blocked.svg" />
     
     
     </span>
@@ -96,6 +93,7 @@ export function getAuth() {
   `;
 }
 
+// Проверка авторизации и получение токена
 export function authEmailPassword(email, password) {
   const apiKey = "AIzaSyCa6-FTZSE0VBhFhzf2IETcXHGyEZ8D8Sc";
   return fetch(

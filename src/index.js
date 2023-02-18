@@ -21,6 +21,7 @@ const sendBtn = document.getElementById("send-lesson");
 let userDate = new Date().toLocaleDateString();
 let token = "";
 
+// Опции для библиотеки календаря
 const options = {
   defaultDate: new Date(),
   dateFormat: "d-m-Y",
@@ -30,18 +31,18 @@ const options = {
 };
 console.log(options.defaultDate.toLocaleDateString());
 
+// Библиотека календаря
 flatpickr(dateForm, options);
 
+// Кнопка выбора даты
 submitBtn.addEventListener("click", submitHandler);
 
+// Получение списка уроков и вывод расписания
 function submitHandler(e) {
   e.preventDefault();
   const schedule = {
     date: userDate,
-    // lesson: inputLesson.value,
   };
-  // Create lessons
-  // Schedules.create(schedule);
 
   // Get lessons
   Schedules.getLessons(schedule.date).then((array) =>
@@ -49,6 +50,7 @@ function submitHandler(e) {
   );
 }
 
+// Создание списка расписания
 function createCardSchedule(array) {
   // const closeBtn = document.querySelector(".close-btn");
   // closeBtn.addEventListener("click", () => {
@@ -69,11 +71,12 @@ function createCardSchedule(array) {
   // }
 }
 
+// Слушатель кнопки входа учителя
 teacherBtn.addEventListener("click", activateModal);
 
+// Вызов модального окна
 function activateModal() {
   if (teacherBtn.textContent === "Выйти") {
-    // token = "";
     inputLesson.setAttribute("disabled", true);
     sendBtn.setAttribute("disabled", true);
     teacherBtn.textContent = "Войти";
@@ -85,6 +88,7 @@ function activateModal() {
     .addEventListener("submit", authHandler, { once: true });
 }
 
+// Обработка авторизации
 function authHandler(e) {
   e.preventDefault();
   const email = e.target.querySelector("#email").value;
@@ -92,11 +96,9 @@ function authHandler(e) {
   authEmailPassword(email, password)
     .then(sendLesson)
     .catch((error) => alert("Неправильный Email или пароль!"));
-
-  // .then(Schedules.fetch)
-  // })
 }
 
+// Внесение уроков
 function sendLesson(token) {
   console.log(token);
   if (!token) {
@@ -106,12 +108,6 @@ function sendLesson(token) {
   // teacherBtn.removeEventListener();
   closeModal();
   teacherBtn.textContent = "Выйти";
-  // teacherBtn.addEventListener("click", () => {
-  //   token = null;
-  //   inputLesson.addAttribute("disabled");
-  //   sendBtn.addAttribute("disabled");
-  //   return;
-  // });
   inputLesson.removeAttribute("disabled");
   sendBtn.removeAttribute("disabled");
   sendBtn.addEventListener("click", (e) => {
