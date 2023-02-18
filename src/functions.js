@@ -56,7 +56,7 @@ export function createModal(title, content) {
   const html = `
   <button type="button" class="modal-close-btn">
   <svg class="svg-icon" width="18" height="18">
-  <use href="./images/symbol-defs.svg#icon-close-button"></use>
+  <use xlink:href="./images/symbol-defs.svg#icon-close-button"></use>
   </svg>
   </button>
 <h1>${title}</h1>
@@ -86,7 +86,7 @@ export function getAuth() {
     <input type="password" id="password" required>
     <label for="password">Пароль</label>
     <span class="eye-btn">
-    <img src="./images/eye-blocked.svg" />    
+    <img src="./images/eye-blocked.png" />    
     </span>
   </div>
   <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Войти</button>
