@@ -55,8 +55,8 @@ export function createModal(title, content) {
   modal.classList.add("modal");
   const html = `
   <button type="button" class="modal-close-btn">
-  <svg width="18px" height="18px">
-  <use href="./src/images/cross.svg" widht="18px"></use>
+  <svg width="18" height="18">
+  <use href="./images/symbol-defs.svg#icon-close-button"></use>
   </svg>
   </button>
 <h1>${title}</h1>
@@ -64,6 +64,9 @@ export function createModal(title, content) {
 `;
   modal.innerHTML = html;
   mui.overlay("on", modal);
+  // document
+  //   .querySelector(".modal-close-btn")
+  //   .addEventListener("click", closeModal());
 }
 
 // Закрытие модалки
@@ -83,9 +86,7 @@ export function getAuth() {
     <input type="password" id="password" required>
     <label for="password">Пароль</label>
     <span class="eye-btn">
-<img src="./src/images/eye-blocked.svg" />
-    
-    
+    <img src="./images/eye-blocked.svg" />    
     </span>
   </div>
   <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Войти</button>
