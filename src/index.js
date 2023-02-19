@@ -84,6 +84,11 @@ function activateModal() {
   }
   createModal("Авторизация", getAuth());
   document
+    .querySelector(".modal-close-btn")
+    .addEventListener("click", closeModal);
+  changeEyeBtn();
+
+  document
     .getElementById("auth-form")
     .addEventListener("submit", authHandler, { once: true });
 }
@@ -93,6 +98,7 @@ function authHandler(e) {
   e.preventDefault();
   const email = e.target.querySelector("#email").value;
   const password = e.target.querySelector("#password").value;
+  changeEyeBtn();
   authEmailPassword(email, password)
     .then(sendLesson)
     .catch((error) => alert("Неправильный Email или пароль!"));
@@ -131,11 +137,18 @@ function sendLesson(token) {
   });
 }
 
-const togglePassword = document.querySelector('#togglePassword');
-const password = document.querySelector('#password');
+function changeEyeBtn() {
+  const togglePassword = document.querySelector("#togglePassword");
+  const password = document.querySelector("#password");
+  const eye = document.querySelector('.eye-cross');
 
-togglePassword.addEventListener('click', function (e) {
-  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-  password.setAttribute('type', type);
-  this.classList.toggle('fa-eye-slash');
-});
+  togglePassword.addEventListener("click", function (e) {
+    const type =
+      password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+    const typeEye =
+      eye.textContent === "visibility_off" ? "visibility" : "visibility_off"; 
+    eye.textContent = typeEye;
+    // this.classList.toggle("fa-eye-slash");
+  });
+}
