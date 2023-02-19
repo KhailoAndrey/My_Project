@@ -76,14 +76,14 @@ button {
 }
 
 .modal-close-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   position: absolute;
   top: 8px;
   right: 8px;
-  width: 30px;
-  height: 30px;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
   fill: black;
@@ -91,9 +91,13 @@ button {
   border-radius: 50%;
   background-color: #fff;
   transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-image: url("./images/cross.png");
+  background-repeat: no-repeat;
+  /* background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='18px' height='18px' viewBox='0 0 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='common-styles' transform='translate(-1145.000000, -1095.000000)'%3E%3Cg id='close_red' transform='translate(1145.000000, 1095.000000)'%3E%3Ccircle id='Oval' fill='%23CC3340' cx='9' cy='9' r='9'%3E%3C/circle%3E%3Cpath d='M5.89262742,5.15354649 L8.999,8.26 L12.0782598,5.18136429 C12.2590032,5.00062092 12.5447903,4.98576029 12.7452379,5.12386001 L12.8160336,5.18279218 C13.0201584,5.38691707 13.0262007,5.7118266 12.8174614,5.92056591 L9.738,8.999 L12.8452792,12.1061983 C13.0274806,12.2883997 13.0435538,12.5753994 12.9057056,12.7760984 L12.8468213,12.846942 C12.6426964,13.0510668 12.3165007,13.0558231 12.1060776,12.8453999 L8.999,9.738 L5.92044521,12.8175821 C5.71710892,13.0209184 5.3808266,13.0143094 5.18267148,12.8161542 C4.97854659,12.6120294 4.97250429,12.2871198 5.18124359,12.0783805 L8.26,8.999 L5.1534258,5.89274811 C4.94844927,5.68777159 4.94978089,5.35410736 5.15188378,5.15200447 C5.35600867,4.94787958 5.68220429,4.94312337 5.89262742,5.15354649 Z' id='close_mob-copy' fill='%23FFFFFF'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); */
 }
 .modal-close-btn:hover,
 .modal-close-btn:focus {
+  opacity: 0.5;
   cursor: pointer;
   fill: blue;
   background-color: #fff;
@@ -101,7 +105,7 @@ button {
   color: blue;
 }
 
-.eye-btn {
+/* .eye-btn {
   float: right;
   margin-top: -25px;
   cursor: pointer;
@@ -111,4 +115,33 @@ button {
   width: 18px;
   height: 18px;
   fill: black;
+} */
+
+#togglePassword {
+  position: relative;
+  float: right;
+  margin-top: -25px;
+  /* left: -30px; */
+  /* top: 5px; */
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: grey;
+  /* background-image: url("./images/eye-blocked.png"); */
+  width: 16px;
+  height: 16px;
+}
+
+#togglePassword:focus {
+  outline: none;
+}
+
+#togglePassword:hover {
+  cursor: pointer;
+}
+
+.fa-eye {
+  float: right;
+  /* margin-top: -25px; */
+  cursor: pointer;
 }

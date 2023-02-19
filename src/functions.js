@@ -54,11 +54,7 @@ export function createModal(title, content) {
   const modal = document.createElement("div");
   modal.classList.add("modal");
   const html = `
-  <button type="button" class="modal-close-btn">
-  <svg class="svg-icon" width="18" height="18">
-  <use xlink:href="./images/symbol-defs.svg#icon-close-button"></use>
-  </svg>
-  </button>
+  <i title="Закрыть" class="modal-close-btn"></i>  
 <h1>${title}</h1>
 <div class="modal-content">${content}</div>
 `;
@@ -68,6 +64,12 @@ export function createModal(title, content) {
   //   .querySelector(".modal-close-btn")
   //   .addEventListener("click", closeModal());
 }
+
+// <button type="button" class="modal-close-btn">
+// <svg class="svg-icon" width="18" height="18">
+// <use xlink:href="./images/symbol-defs.svg#icon-close-button"></use>
+// </svg>
+// </button>
 
 // Закрытие модалки
 export function closeModal() {
@@ -83,14 +85,14 @@ export function getAuth() {
     <label for="email">Email</label>
   </div>
   <div class="mui-textfield mui-textfield--float-label">
-    <input type="password" id="password" required>
-    <label for="password">Пароль</label>
-    <span class="eye-btn">
-    <img src="./images/eye-blocked.png" />    
-    </span>
+  <input type="password" id="password" required>
+  <label for="password">Пароль </label>
+  <button type="button" id="togglePassword">
+  <i class="fa fa-eye" aria-hidden="true">&#128065;</i>
+      </button> 
   </div>
   <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Войти</button>
-</form>
+  </form>
   `;
 }
 
