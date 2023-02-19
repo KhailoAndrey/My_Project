@@ -149,6 +149,5 @@ function changeEyeBtn() {
     const typeEye =
       eye.textContent === "visibility_off" ? "visibility" : "visibility_off"; 
     eye.textContent = typeEye;
-    // this.classList.toggle("fa-eye-slash");
   });
 }
