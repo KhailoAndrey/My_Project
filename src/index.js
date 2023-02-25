@@ -137,6 +137,7 @@ function sendLesson(token) {
   });
 }
 
+// Функция показать/скрыть пароль
 function changeEyeBtn() {
   const togglePassword = document.querySelector("#togglePassword");
   const password = document.querySelector("#password");
